@@ -1,0 +1,1 @@
+web: gunicorn letsgoApi.wsgi --log-file -
