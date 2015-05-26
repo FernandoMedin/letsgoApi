@@ -1,5 +1,5 @@
 from django.db import models
-from letsgoApi.models import Users
+from app.models import Users
 import datetime
 
 class UsersModels(models.Model):
@@ -16,6 +16,9 @@ class UsersModels(models.Model):
         return 0
 
     def login_facebook(self, token):
+
+        response = ""
+
         if token:
             response = Users.objects.get(token=token)
 

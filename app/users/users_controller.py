@@ -1,6 +1,6 @@
 from django.views.generic import View
 from django.http import HttpResponse
-import datetime, json
+from app.users.users_models import UsersModels
 
 class Users(View):
 
@@ -39,7 +39,7 @@ class Users(View):
         token = request.POST.get("token", "")
 
         if token:
-            response = # Get Auth
+            response = "" # Gerar response
             if len(response) != 0:
                 return HttpResponse("Autenticado")
 
@@ -49,4 +49,3 @@ class Users(View):
 
     def teste(self, request):
         return "Funfou!!!"
-
