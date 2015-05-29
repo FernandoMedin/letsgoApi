@@ -75,13 +75,14 @@ WSGI_APPLICATION = 'letsgoApi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# Database used for tests; Change when production
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dc6km38nhb1t2l',
-        'USER': 'fzqbcrwunaknvw',
-        'PASSWORD': '3HGHAafy_uWUU7I40PIyp4fRaY',
-        'HOST': 'ec2-107-20-152-139.compute-1.amazonaws.com',
+        'NAME': 'letsgoTest',
+        'USER': 'Postgres',
+        'PASSWORD': 'teste321',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
