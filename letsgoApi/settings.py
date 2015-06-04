@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'rest_framework'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -76,16 +77,10 @@ WSGI_APPLICATION = 'letsgoApi.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dc6km38nhb1t2l',
-        'USER': 'fzqbcrwunaknvw',
-        'PASSWORD': '3HGHAafy_uWUU7I40PIyp4fRaY',
-        'HOST': 'ec2-107-20-152-139.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    # export DATABASE_URL=postgres:/password/username:@localhost:5432/letsgo
+    # export DATABASE_URL=postgres://iCesar:@localhost:5432/letsgo
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -94,7 +89,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+USE_TZ = False
 
 
 # Parse database configuration from $DATABASE_URL
