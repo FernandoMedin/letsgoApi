@@ -2,16 +2,20 @@ from django.views.generic import View
 from django.http import HttpResponse
 from app.users.users_models import UsersModels
 
+
 class Users(View):
 
-    def get_token(self, request):
-        # Get token from Facebook
+    def create_user(self, request):
+        # Get token from Facebook and create an user
 
         model = UsersModels()
 
         token = request.POST.get("token", "")
+        name = request.POST.get("name", "")
+        last_name = request.POST.get("last_name", "")
+        email = request.POST.get("email", "")
         if token:
-            model.insert_token(token)
+            model.insert_token(token, name, last_name, email)
             return HttpResponse("Foi")
 
         return HttpResponse("Nao foi")
@@ -31,6 +35,9 @@ class Users(View):
 
         return HttpResponse("Sem token")
 
+    def create_token(self):
+        return 1
+
     def auth_user(self, request):
         # Auth users in all requests
 
@@ -39,7 +46,7 @@ class Users(View):
         token = request.POST.get("token", "")
 
         if token:
-            response = "" # Gerar response
+            response = "" # Generate response
             if len(response) != 0:
                 return HttpResponse("Autenticado")
 

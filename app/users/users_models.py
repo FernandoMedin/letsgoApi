@@ -2,18 +2,22 @@ from django.db import models
 from app.models import Users
 import datetime
 
+
 class UsersModels(models.Model):
 
-    def insert_token(self, token):
+    def insert_user(self, token, name, last_name, email):
         if token:
             response = Users(
-                    token=token,
-                    created_at=datetime.datetime.now())
+                token=token,
+                name=name,
+                last_name=last_name,
+                email=email,
+                created_at=datetime.datetime.now())
             response.save()
 
-            return 1
+            return True
 
-        return 0
+        return False
 
     def login_facebook(self, token):
 
@@ -23,6 +27,6 @@ class UsersModels(models.Model):
             response = Users.objects.get(token=token)
 
         if response:
-            return 1
+            return True
 
-        return 0
+        return False

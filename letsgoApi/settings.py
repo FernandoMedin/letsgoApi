@@ -76,6 +76,7 @@ WSGI_APPLICATION = 'letsgoApi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# Database used for tests; Change when production
 DATABASES = {
     'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
     # export DATABASE_URL=postgres:/password/username:@localhost:5432/letsgo
