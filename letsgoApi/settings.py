@@ -28,6 +28,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -39,7 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'app',
     'rest_framework',
-    'corsheaders'
+    'rest_framework.authtoken',
+    'corsheaders',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,6 +55,16 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.SessionAuthentication',
+    # ),
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
 
 ROOT_URLCONF = 'letsgoApi.urls'
 
@@ -71,6 +83,8 @@ TEMPLATES = [
         },
     },
 ]
+
+FACEBOOK_SECRET = 'ec4d471ee643bc2f8498ba5338dd86da'
 
 WSGI_APPLICATION = 'letsgoApi.wsgi.application'
 
@@ -91,6 +105,8 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
+
+AUTH_USER_MODEL = 'app.User'
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
