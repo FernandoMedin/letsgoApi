@@ -8,3 +8,4 @@ whitenoise==1.0.6
 pygcm
 djangorestframework
 django-cors-headers
+requests
