@@ -1,14 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+PROVIDERS = ( ('Local', 'Local'), ('Facebook', 'Facebook') )
+
 class UserManager(BaseUserManager):
     # Copied for the win https://thinkster.io/django-angularjs-tutorial/
-    def create_user(self, email, password=None, **kwargs):
+    def create_user(self, email, password=None, first_name=None, last_name=None, **kwargs):
         if not email:
             raise ValueError('Users must have a valid email address.')
 
         user = self.model(email = self.normalize_email(email))
-        user.set_password(password)
+        if password:
+            user.set_password(password)
+
+        user.first_name = first_name
+        user.last_name = last_name
         user.save()
 
         return user
@@ -23,9 +29,11 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=50)
-    last_name  = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50, blank=False)
+    last_name  = models.CharField(max_length=50, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    provider   = models.CharField(choices=PROVIDERS, default="Local", max_length=15)
 
     objects = UserManager()
 

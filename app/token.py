@@ -65,4 +65,4 @@ class ObtainAuthToken(ObtainAuthToken):
 
         return Response({ 'token': token.key })
 
-obtain_expiring_auth_token = ObtainAuthToken.as_view()
+obtain_auth_token = ObtainAuthToken.as_view()

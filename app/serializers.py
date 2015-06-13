@@ -1,6 +1,6 @@
 import datetime
 from rest_framework import serializers
-from app.models import User, Profile, Organizations, Event_Category, Event_Type, Events
+from app.models import PROVIDERS, User, UserManager, Profile, Organizations, Event_Category, Event_Type, Events
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -35,10 +35,29 @@ class UserSerializer(serializers.ModelSerializer):
         slug_field="name",
     )
 
+    # input type password
+    password = serializers.CharField(
+        style={'input_type': 'password'},
+        # write_only=True,
+        allow_null=True,
+    )
+
+    provider = serializers.ChoiceField(choices=PROVIDERS, read_only=True)
+
+    def create(self, validated_data):
+
+        user = User.objects.create_user(email=validated_data['email'],
+                                        password=validated_data['password'],
+                                        first_name=validated_data['first_name'],
+                                        last_name=validated_data['last_name'])
+
+        return user
+
     class Meta:
         model = User
-        fields = ('url', 'id', 'email', 'facebook_id',
-                  'facebook_token', 'orgs', 'user_events')
+        fields = ('url', 'id', 'provider', 'email', 'first_name', 'last_name',
+                  'password', 'facebook_id', 'facebook_token',
+                  'orgs', 'user_events')
 
 class OrgSerializer(serializers.ModelSerializer):
 

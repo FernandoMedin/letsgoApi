@@ -22,7 +22,10 @@ class UserTest(APITestCase):
         Should insert an user on database and return 201 status
         """
         user = {
-            'email': 'test@gmail.com'
+            'email': 'test@gmail.com',
+            'first_name': 'name',
+            'last_name': None,
+            'password': None
         }
         response = self.client.post('/users/', user)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -32,7 +35,9 @@ class UserTest(APITestCase):
         Should create an user with invalid params and return a 400 bad request
         """
         user = {
-            'email_error' : "TestToken@gmail.com"
+            'email_error' : "TestToken@gmail.com",
+            'first_name': 'name',
+            'password': None
         }
         response = self.client.post('/users/', user)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -42,7 +47,10 @@ class UserTest(APITestCase):
         Should create an user following by an organization
         """
         user = {
-            'email': 'UserToOrg@gmail.com'
+            'email': 'UserToOrg@gmail.com',
+            'first_name': 'name',
+            'last_name': None,
+            'password': None
         }
         response = self.client.post('/users/', user)
         org = {
@@ -58,7 +66,10 @@ class UserTest(APITestCase):
         Should create an event by an user
         """
         user = {
-            'email': 'UserEvent@gmail.com'
+            'email': 'UserEvent@gmail.com',
+            'first_name': 'name',
+            'last_name': None,
+            'password': None
         }
         response = self.client.post('/users/', user)
 
@@ -91,7 +102,10 @@ class UserTest(APITestCase):
         Should create an event by an org
         """
         user = {
-            'email': 'UserEvent2@gmail.com'
+            'email': 'UserEvent2@gmail.com',
+            'first_name': 'name',
+            'last_name': None,
+            'password': None
         }
         response = self.client.post('/users/', user)
 
@@ -130,7 +144,10 @@ class UserTest(APITestCase):
         Should create an event with an user and an organizations with throw an 400 exception
         """
         user = {
-            'email': 'UserEvent2@gmail.com'
+            'email': 'UserEvent2@gmail.com',
+            'first_name': 'name',
+            'last_name': None,
+            'password': None
         }
         response = self.client.post('/users/', user)
 

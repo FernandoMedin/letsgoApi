@@ -35,10 +35,11 @@ class FaceBook(APIView):
         if not user:
             # User doesn't exists, Create user model
             name = profile['first_name'].replace(' ', '').lower()
-            user = User(email=profile['email'],
-                        first_name=profile['first_name'],
-                        last_name=profile['last_name'])
-            user.save()
+            user = User.objects.create_user(profile['email'],
+                                            password=None,
+                                            first_name=profile['first_name'],
+                                            last_name=profile['last_name'],
+                                            provider="Facebook")
 
             user_profile = Profile(owner=user,
                                 facebook_id=profile['id'],
