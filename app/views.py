@@ -22,6 +22,7 @@ class Current(APIView):
             'email': request.user.email,
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
+            'facebook_id': request.user.profile.facebook_id,
         }
 
         return Response(data)
