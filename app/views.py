@@ -1,5 +1,5 @@
-import datetime
 import json
+import datetime
 from app.token import TokenAuth
 from rest_framework.views import APIView
 from rest_framework import viewsets, permissions
@@ -22,8 +22,12 @@ class Current(APIView):
             'email': request.user.email,
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
-            'facebook_id': request.user.profile.facebook_id,
         }
+
+        profile = Profile.objects.filter(owner=request.user).first()
+
+        if profile:
+            data['facebook_id'] = request.user.profile.facebook_id
 
         return Response(data)
 
