@@ -51,8 +51,8 @@ class FaceBook(APIView):
             if not user_connected:
                 # create profile with facebook_token
                 user_profile = Profile(owner=user,
-                                    facebook_id=profile['id'],
-                                    facebook_token=access_token['access_token'])
+                                       facebook_id=profile['id'],
+                                       facebook_token=access_token['access_token'])
                 user_profile.save()
 
             user.first_name = profile['first_name']
@@ -67,6 +67,4 @@ class FaceBook(APIView):
         }
 
         return Response(data)
-
-
 

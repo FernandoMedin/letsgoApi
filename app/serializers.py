@@ -1,5 +1,6 @@
 import datetime
 from rest_framework import serializers
+from rest_framework.authtoken.models import Token
 from app.models import PROVIDERS, User, UserManager, Profile, Organizations, Event_Category, Event_Type, Events
 
 
@@ -11,7 +12,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
 
-    facebook_id    = serializers.CharField(
+    facebook_id = serializers.CharField(
         source='profile.facebook_id',
         allow_null=True,
         read_only=True,
@@ -35,11 +36,16 @@ class UserSerializer(serializers.ModelSerializer):
         slug_field="name",
     )
 
-    # input type password
     password = serializers.CharField(
+        # input type password
         style={'input_type': 'password'},
-        # write_only=True,
+        write_only=True,
         allow_null=True,
+    )
+
+    token = serializers.CharField(
+        source='auth_token',
+        read_only=True
     )
 
     provider = serializers.ChoiceField(choices=PROVIDERS, read_only=True)
@@ -51,13 +57,15 @@ class UserSerializer(serializers.ModelSerializer):
                                         first_name=validated_data['first_name'],
                                         last_name=validated_data['last_name'])
 
+        token, created = Token.objects.get_or_create(user=user)
+
         return user
 
     class Meta:
         model = User
         fields = ('url', 'id', 'provider', 'email', 'first_name', 'last_name',
                   'password', 'facebook_id', 'facebook_token',
-                  'orgs', 'user_events')
+                  'orgs', 'user_events', 'token')
 
 class OrgSerializer(serializers.ModelSerializer):
 

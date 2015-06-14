@@ -51,7 +51,7 @@ class TokenSerializer(serializers.Serializer):
 class ObtainAuthToken(ObtainAuthToken):
 
     serializer_class = TokenSerializer
-    # renderer_classes = (renderers.StaticHTMLRenderer,)
+    renderer_classes = (renderers.JSONRenderer,)
 
     def get(self, request):
         #TODO: render a view
