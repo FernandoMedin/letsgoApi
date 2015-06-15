@@ -2,7 +2,7 @@ import json
 import datetime
 from app.token import TokenAuth
 from rest_framework.views import APIView
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, serializers
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
@@ -18,18 +18,8 @@ class Current(APIView):
 
     def get(self, request):
 
-        data = {
-            'email': request.user.email,
-            'first_name': request.user.first_name,
-            'last_name': request.user.last_name,
-        }
-
-        profile = Profile.objects.filter(owner=request.user).first()
-
-        if profile:
-            data['facebook_id'] = request.user.profile.facebook_id
-
-        return Response(data)
+        serializer = UserSerializer(request.user, context={'request': request})
+        return Response(serializer.data)
 
 class Profile_ViewSet(viewsets.ModelViewSet):
 
