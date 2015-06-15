@@ -78,7 +78,7 @@ class OrgSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organizations
         read_only_fields = ('created_at', 'updated_at', 'premium_at',)
-        fields = ('url', 'id', 'user', 'name', 'premium', 'org_events')
+        fields = ('url', 'id', 'user', 'name', 'description', 'premium', 'org_events')
 
 class Event_Category_Serializer(serializers.ModelSerializer):
 
@@ -96,7 +96,7 @@ class Events_Serializer(serializers.ModelSerializer):
 
     class Meta:
         model = Events
-        fields = ('url', 'id', 'name', 'date', 'place', 'time', 'price', 'user',
+        fields = ('url', 'id', 'name', 'description', 'date', 'place', 'time', 'price', 'user',
                   'organization', 'event_type', 'category')
 
     def validate(self, data):

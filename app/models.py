@@ -59,6 +59,7 @@ class Profile(models.Model):
 class Organizations(models.Model):
     user = models.ForeignKey(User, related_name='orgs')
     name = models.CharField(max_length=50)
+    description = models.TextField(default="")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     premium = models.BooleanField(default=False)
@@ -85,6 +86,7 @@ class Event_Type(models.Model):
 
 class Events(models.Model):
     name = models.CharField(max_length=50)
+    description = models.TextField(default="")
     date = models.DateField()
     place = models.TextField()
     time = models.TimeField()
