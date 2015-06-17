@@ -94,10 +94,12 @@ class Event_Type_Serializer(serializers.ModelSerializer):
 
 class Events_Serializer(serializers.ModelSerializer):
 
+    owner = UserSerializer(many=False, read_only=True, source="user")
+
     class Meta:
         model = Events
-        fields = ('url', 'id', 'name', 'description', 'date', 'place', 'time', 'price', 'user',
-                  'organization', 'event_type', 'category')
+        fields = ('url', 'id', 'name', 'description', 'date', 'place', 'time',
+                  'price', 'user', 'owner', 'organization', 'event_type', 'category')
 
     def validate(self, data):
 
