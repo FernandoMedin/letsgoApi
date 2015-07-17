@@ -90,7 +90,8 @@ WSGI_APPLICATION = 'letsgoApi.wsgi.application'
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8100'
+    'http://localhost:8100',
+    'http://fernandomedin.github.io'
 )
 
 # Database
